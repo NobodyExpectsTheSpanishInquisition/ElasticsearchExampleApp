@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  elasticsearch:
+    env_file:
+      - .env
+    build:
+      context: .
+      dockerfile: dockerfile.elasticsearch
+      args:
+        - IMAGE_TAG=${ELASTICSEARCH_IMAGE_TAG}
+    container_name: ${ELASTICSEARCH_CONTAINER_NAME}
+    ports:
+      - ${ELASTICSEARCH_EXTERNAL_PORT}:${ELASTICSEARCH_INTERNAL_PORT}
+    environment:
+      - xpack.security.enabled=${ELASTICSEARCH_XPACK_SECURITY_ENABLED}
+      - discovery.seed_hosts=${ELASTICSEARCH_DISCOVERY_SEED_HOST}
+      - discovery.type=${ELASTICSEARCH_DISCOVERY_TYPE}

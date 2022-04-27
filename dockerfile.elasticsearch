@@ -1,0 +1,10 @@
+ARG IMAGE_TAG
+FROM elasticsearch:${IMAGE_TAG}
+
+USER root
+
+RUN apt-get update \
+    && apt-get install nano
+
+
+USER elasticsearch:root
